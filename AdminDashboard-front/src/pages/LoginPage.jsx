@@ -1,12 +1,18 @@
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 export function LoginPage() {
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState("")
+  const navigate = useNavigate()
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("Password submitted: " + password);
-  };
+    if (password === "123") {
+      navigate("/dashboard")
+    } else {
+      alert("Incorrect password")
+    }
+  }
 
   return (
     <div className="login-container">

@@ -1,3 +1,2 @@
-@import "pages/login";
-
-@import "./base.scss";
+@use "pages/login";
+@use "./base";

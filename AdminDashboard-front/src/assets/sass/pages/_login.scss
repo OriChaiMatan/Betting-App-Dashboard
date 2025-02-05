@@ -4,7 +4,7 @@ $primary-color: #3498db;
 $background-color: #f4f4f4;
 $card-bg: #ffffff;
 $input-border: #ccc;
-$button-hover: darken($primary-color, 10%);
+$button-hover: rgba($primary-color, .1);
 
 .login-container {
   display: flex;
