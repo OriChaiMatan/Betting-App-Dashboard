@@ -1,43 +1,38 @@
-import { httpService } from "./http.service"
+import { storageService } from "./async-storage.service.js";
+import { utilService } from "./util.service.js";
+import { httpService } from "./http.service.js";
 
-export const leaguesService = {
-    query,
-    getLeagueById,
-    getTeamByLeagueAndTeamId,
-    getTeamById
+export const linkService = {
+  query,
+  getById,
+  save,
+  remove
 }
 
-const BASE_URL = "league/"
+window.cs = linkService;
+
+const BASE_URL = "link/";
 
 async function query() {
-    return await httpService.get(BASE_URL)
+  return httpService.get(BASE_URL);
 }
 
-async function getLeagueById(leagueId) {
-    const league = await httpService.get(`${BASE_URL}${leagueId}`)
-    return league
+async function getById(stayId) {
+  const stay = await httpService.get(`${BASE_URL}${stayId}`)
+  return stay
 }
 
-async function getTeamByLeagueAndTeamId(leagueId, teamId) {
-    try {
-        const team = await httpService.get(`${BASE_URL}${leagueId}/${teamId}`)
-        return team
-    } catch (err) {
-        console.error(`Failed to fetch team with ID ${teamId} from league ${leagueId}`, err)
-        throw err
-    }
+async function remove(stayId) {
+  return httpService.delete(`${BASE_URL}${stayId}`)
 }
 
-async function getTeamById(teamId) {
-    try {
-        const leagues = await query() // Get all leagues
-        for (const league of leagues) {
-            const team = league.league_teams?.find(team => team.team_key === teamId)
-            if (team) return team
-        }
-        throw new Error(`Team with ID ${teamId} not found in any league`)
-    } catch (err) {
-        console.error(`Failed to fetch team with ID ${teamId}`, err)
-        throw err
-    }
+async function save(stay) {
+  var savedStay;
+  if (stay && stay._id) {
+    savedStay = await httpService.put(`${BASE_URL}${stay._id}`, stay)
+  } else {
+    savedStay = await httpService.post(`${BASE_URL}`, stay)
+  }
+  return savedStay
 }
+  
