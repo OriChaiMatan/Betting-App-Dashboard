@@ -24,17 +24,26 @@ export async function getLink(req, res) {
 }
 
 export async function removeLink(req, res) {
-
-    const { linkId } = req.params
-
     try {
-        await linksService.remove(linkId, req.loggedinUser)
-        res.send('deleted')
+        const { linkId } = req.params;
+
+        if (!linkId) {
+            return res.status(400).send({ error: "Missing linkId in request" });
+        }
+
+        const deletedCount = await linksService.remove(linkId);
+
+        if (!deletedCount) {
+            return res.status(404).send({ error: "Link not found" });
+        }
+
+        res.send({ message: "Deleted successfully", linkId });
     } catch (err) {
-        loggerService.error(`Cannot remove stay`, err)
-        res.status(400).send(`Cannot remove stay`)
+        loggerService.error(`Cannot remove link`, err);
+        res.status(500).send({ error: "Cannot remove link" });
     }
 }
+
 
 export async function updateLink(req, res) {
     const { _id, title, imgUrl, link } = req.body

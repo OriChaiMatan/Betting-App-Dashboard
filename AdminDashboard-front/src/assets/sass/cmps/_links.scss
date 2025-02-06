@@ -1,0 +1,80 @@
+.link-preview {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1rem;
+    width: 80rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    transition: 0.3s ease-in-out;
+  
+    &:hover {
+      background-color: #f1f1f1;
+    }
+  
+    .link-image {
+      width: 50px;
+      height: 50px;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+  
+    .link-details {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+  
+    .link-title {
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin: 0;
+    }
+  
+    .link-url a {
+      color: #007bff;
+      text-decoration: none;
+  
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  
+    .edit-button,
+    .delete-button {
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.3s;
+  
+      &.edit-button {
+        background-color: #4caf50;
+        color: white;
+  
+        &:hover {
+          background-color: #43a047;
+        }
+      }
+  
+      &.delete-button {
+        background-color: #e74c3c;
+        color: white;
+  
+        &:hover {
+          background-color: #c0392b;
+        }
+      }
+    }
+  }
+  
+
+  .link-list{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    list-style: none;
+    justify-content: center;
+  }

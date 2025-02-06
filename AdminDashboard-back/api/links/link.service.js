@@ -41,14 +41,21 @@ async function getById(linkId) {
 }
 
 
-async function remove(linkId, loggedinUser) {
+async function remove(linkId) {
     try {
-        const collection = await dbService.getCollection(collectionName)
-        const { deletedCount } = await collection.deleteOne({ _id: new ObjectId(linkId) })
-        return deletedCount
+        const collection = await dbService.getCollection("links");
+
+        const deletedResult = await collection.deleteOne({ _id: new ObjectId(linkId) });
+
+        if (deletedResult.deletedCount === 0) {
+            loggerService.error(`Link with ID ${linkId} not found`);
+            return 0;
+        }
+
+        return deletedResult.deletedCount;
     } catch (err) {
-        loggerService.error(`cannot remove stay ${linkId}`, err)
-        throw err
+        loggerService.error(`Cannot remove link ${linkId}`, err);
+        throw err;
     }
 }
 

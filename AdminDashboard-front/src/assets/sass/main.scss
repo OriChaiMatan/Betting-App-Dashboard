@@ -1,2 +1,4 @@
-@use "pages/login";
-@use "./base";
+@import "./cmps/links";
+@import "./pages/login";
+@import "./pages/dashboard";
+@import "./base";

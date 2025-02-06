@@ -22,9 +22,12 @@ async function getById(stayId) {
   return stay
 }
 
-async function remove(stayId) {
-  return httpService.delete(`${BASE_URL}${stayId}`)
+async function remove(linkId) {
+    if (!linkId) throw new Error("Missing linkId for deletion");
+
+    return httpService.delete(`link/${linkId}`);
 }
+
 
 async function save(stay) {
   var savedStay;
