@@ -2,9 +2,13 @@ import express from 'express'
 import cors from 'cors'
 import path from 'path'
 import cookieParser from 'cookie-parser'
+import { config } from "dotenv";
+import "dotenv/config.js";
 import { createServer } from "node:http";
 
 import { loggerService } from './services/logger.service.js'
+
+config();
 
 const app = express()
 const server = createServer(app)
